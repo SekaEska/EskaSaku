@@ -156,8 +156,8 @@ export default async function handler(req, res) {
     return res.status(401).json({ error: 'Unauthorized: Invalid webhook secret' });
   }
 
-  const supabaseUrl = process.env.VITE_SUPABASE_URL || 'https://vcoupegsuapuircfwrpe.supabase.co';
-  const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY || 'sb_publishable_tUnOd-ikngepqoaWWZpc4A_bVWaQou1';
+  const supabaseUrl = process.env.VITE_SUPABASE_URL || 'https://jevnmklkmzynoadjcice.supabase.co';
+  const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY || 'sb_publishable_0AgfadOXnVxDU7JkY3RIIg_h6c_5Yz0';
 
   if (!supabaseUrl || !supabaseKey) {
     return res.status(500).json({ error: 'Supabase URL or Key not configured' });
