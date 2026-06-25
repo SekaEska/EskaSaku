@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sakuku-cache-v1';
+const CACHE_NAME = 'sakuku-cache-v2'; // ponytail: Bump manually for hard cache reset. NetworkFirst strategy handles index.html updates anyway.
 const ASSETS_TO_CACHE = [
   './',
   './index.html',

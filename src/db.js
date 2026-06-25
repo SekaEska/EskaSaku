@@ -193,7 +193,8 @@ export const db = {
           const { error } = await supabase
             .from('transactions')
             .delete()
-            .eq('id', item.id);
+            .eq('id', item.id)
+            .eq('sync_id', getSyncId());
 
           if (error) throw error;
         }
