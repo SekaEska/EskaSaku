@@ -156,8 +156,9 @@ export default async function handler(req, res) {
     return res.status(401).json({ error: 'Unauthorized: Invalid webhook secret' });
   }
 
-  const supabaseUrl = process.env.VITE_SUPABASE_URL || 'https://jevnmklkmzynoadjcice.supabase.co';
-  const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY || 'sb_publishable_0AgfadOXnVxDU7JkY3RIIg_h6c_5Yz0';
+  // Security Fix: Prioritize Service Key (admin rights) over Anon Key to prevent webhook breakage if RLS is enabled
+  const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || 'https://jevnmklkmzynoadjcice.supabase.co';
+  const supabaseKey = process.env.SUPABASE_SERVICE_KEY || process.env.VITE_SUPABASE_ANON_KEY || 'sb_publishable_0AgfadOXnVxDU7JkY3RIIg_h6c_5Yz0';
 
   if (!supabaseUrl || !supabaseKey) {
     return res.status(500).json({ error: 'Supabase URL or Key not configured' });
@@ -180,7 +181,7 @@ export default async function handler(req, res) {
     amount: parsed.amount,
     type: parsed.type,
     category: parsed.category,
-    date: new Date().toISOString().split('T')[0],
+    date: new Date(Date.now() + 7 * 3600 * 1000).toISOString().split('T')[0], // UTC+7 WIB
     description: `🤖 ${sourceLabel}: ${text.substring(0, 100)}`,
     created_at: new Date().toISOString()
   };
